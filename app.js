@@ -9,12 +9,12 @@ const DEMO_MODE = true;  // true = 純前端 localStorage；false = 預留未來
 
 // 獎項設定：機率總和必須為 100
 const PRIZES = [
-    { id: 'prize_01', name: 'iPhone 17',        chance: 1,  image: 'images/prize_01.png' },
-    { id: 'prize_02', name: 'AirPods',          chance: 5,  image: 'images/prize_02.png' },
-    { id: 'prize_03', name: '超商禮券 100 元',   chance: 10, image: 'images/prize_03.png' },
-    { id: 'prize_04', name: '買一送一券',        chance: 20, image: 'images/prize_04.png' },
-    { id: 'prize_05', name: '折價 50 元',        chance: 30, image: 'images/prize_05.png' },
-    { id: 'prize_06', name: '銘謝惠顧',          chance: 34, image: 'images/prize_06.png' },
+    { id: 'prize_01', name: 'iPhone 17',        chance: 34, image: 'images/prize_01.png' },
+    { id: 'prize_02', name: 'AirPods',          chance: 30, image: 'images/prize_02.png' },
+    { id: 'prize_03', name: '超商禮券 100 元',   chance: 20, image: 'images/prize_03.png' },
+    { id: 'prize_04', name: '買一送一券',        chance: 10, image: 'images/prize_04.png' },
+    { id: 'prize_05', name: '折價 50 元',        chance: 5,  image: 'images/prize_05.png' },
+    { id: 'prize_06', name: '銘謝惠顧',          chance: 1,  image: 'images/prize_06.png' },
 ];
 
 // localStorage key prefix
