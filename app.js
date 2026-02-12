@@ -9,16 +9,175 @@ const DEMO_MODE = true;  // true = 純前端 localStorage；false = 預留未來
 
 // 獎項設定：機率總和必須為 100
 const PRIZES = [
-    { id: 'prize_01', name: 'iPhone 17',        chance: 34, image: 'images/prize_01.png' },
-    { id: 'prize_02', name: 'AirPods',          chance: 30, image: 'images/prize_02.png' },
-    { id: 'prize_03', name: '超商禮券 100 元',   chance: 20, image: 'images/prize_03.png' },
-    { id: 'prize_04', name: '買一送一券',        chance: 10, image: 'images/prize_04.png' },
-    { id: 'prize_05', name: '折價 50 元',        chance: 5,  image: 'images/prize_05.png' },
-    { id: 'prize_06', name: '銘謝惠顧',          chance: 1,  image: 'images/prize_06.png' },
+    { id: 'prize_01', name: { zh: 'iPhone 17',        en: 'iPhone 17',        th: 'iPhone 17' },        chance: 34, image: 'images/prize_01.png' },
+    { id: 'prize_02', name: { zh: 'AirPods',          en: 'AirPods',          th: 'AirPods' },          chance: 30, image: 'images/prize_02.png' },
+    { id: 'prize_03', name: { zh: '超商禮券 100 元',   en: '$100 Gift Card',   th: 'บัตรของขวัญ 100 บาท' },   chance: 20, image: 'images/prize_03.png' },
+    { id: 'prize_04', name: { zh: '買一送一券',        en: 'Buy 1 Get 1 Free', th: 'ซื้อ 1 แถม 1' }, chance: 10, image: 'images/prize_04.png' },
+    { id: 'prize_05', name: { zh: '折價 50 元',        en: '$50 Discount',     th: 'ส่วนลด 50 บาท' },     chance: 5,  image: 'images/prize_05.png' },
+    { id: 'prize_06', name: { zh: '銘謝惠顧',          en: 'Better Luck Next Time', th: 'ขอบคุณที่ร่วมกิจกรรม' }, chance: 1, image: 'images/prize_06.png' },
 ];
 
 // localStorage key prefix
 const STORAGE_PREFIX = 'scratch_event_';
+
+// ==================== 多國語言字典 ====================
+
+const LANG = {
+    zh: {
+        // 頁面 title
+        page_title: '瓶蓋刮刮樂活動',
+        // Loading 頁
+        loading_text: '驗證活動資格中...',
+        // 填資料頁
+        register_title: '瓶蓋刮刮樂',
+        register_subtitle: '填寫資料即可參加抽獎！',
+        label_name: '姓名',
+        label_phone: '手機號碼',
+        placeholder_name: '請輸入您的姓名',
+        placeholder_phone: '例：0912345678',
+        btn_start: '開始刮獎！',
+        // 刮刮樂頁
+        scratch_title: '刮刮樂',
+        scratch_subtitle: '用手指刮開灰色區域',
+        scratch_hint: '刮開超過 50% 即可揭曉獎品',
+        scratch_canvas_text: '用手指刮開此區域',
+        scratch_hidden_text: '🎁 刮開揭曉獎品 🎁',
+        // 中獎頁
+        prize_title_win: '🎊 恭喜中獎！',
+        prize_title_lose: '😅 銘謝惠顧',
+        redeem_title: '兌換說明',
+        redeem_1: '請於活動期間內至指定門市出示此畫面兌換',
+        redeem_2: '每組條碼僅限兌換一次',
+        redeem_3: '獎品不得轉讓或折換現金',
+        redeem_4: '活動期限：即日起至 2026/12/31',
+        screenshot_hint: '📸 建議截圖保存此畫面',
+        // 已參加過頁
+        used_title: '此瓶蓋已參加過活動',
+        used_desc: '每個瓶蓋僅能參加一次抽獎活動，<br>感謝您的參與！',
+        used_participant: '參加者：',
+        used_prize: '中獎獎品：',
+        used_barcode: '條碼號碼：',
+        // 錯誤頁
+        error_title: '無效的活動連結',
+        error_desc: '請確認您掃描的是正確的瓶蓋 QR Code。',
+        // 表單驗證
+        alert_phone: '請輸入正確的手機號碼格式（09 開頭共 10 碼）',
+    },
+    en: {
+        page_title: 'Bottle Cap Scratch Card',
+        loading_text: 'Verifying eligibility...',
+        register_title: 'Scratch & Win',
+        register_subtitle: 'Fill in your info to join the lucky draw!',
+        label_name: 'Name',
+        label_phone: 'Phone Number',
+        placeholder_name: 'Enter your name',
+        placeholder_phone: 'e.g. 0912345678',
+        btn_start: 'Start Scratching!',
+        scratch_title: 'Scratch Card',
+        scratch_subtitle: 'Use your finger to scratch the grey area',
+        scratch_hint: 'Scratch over 50% to reveal your prize',
+        scratch_canvas_text: 'Scratch here',
+        scratch_hidden_text: '🎁 Scratch to Reveal 🎁',
+        prize_title_win: '🎊 Congratulations!',
+        prize_title_lose: '😅 Better Luck Next Time',
+        redeem_title: 'Redemption Info',
+        redeem_1: 'Present this screen at a designated store to redeem',
+        redeem_2: 'Each barcode can only be redeemed once',
+        redeem_3: 'Prizes are non-transferable and non-refundable',
+        redeem_4: 'Valid from now until 2026/12/31',
+        screenshot_hint: '📸 We recommend taking a screenshot',
+        used_title: 'Already Participated',
+        used_desc: 'Each bottle cap can only be used once.<br>Thank you for participating!',
+        used_participant: 'Participant: ',
+        used_prize: 'Prize Won: ',
+        used_barcode: 'Barcode: ',
+        error_title: 'Invalid Link',
+        error_desc: 'Please make sure you scanned the correct bottle cap QR Code.',
+        alert_phone: 'Please enter a valid phone number (10 digits starting with 09)',
+    },
+    th: {
+        page_title: 'กิจกรรมขูดฝาขวด',
+        loading_text: 'กำลังตรวจสอบสิทธิ์...',
+        register_title: 'ขูดลุ้นรางวัล',
+        register_subtitle: 'กรอกข้อมูลเพื่อร่วมลุ้นรางวัล!',
+        label_name: 'ชื่อ',
+        label_phone: 'เบอร์โทรศัพท์',
+        placeholder_name: 'กรอกชื่อของคุณ',
+        placeholder_phone: 'เช่น 0912345678',
+        btn_start: 'เริ่มขูด!',
+        scratch_title: 'บัตรขูด',
+        scratch_subtitle: 'ใช้นิ้วขูดบริเวณสีเทา',
+        scratch_hint: 'ขูดมากกว่า 50% เพื่อเปิดรางวัล',
+        scratch_canvas_text: 'ขูดตรงนี้',
+        scratch_hidden_text: '🎁 ขูดเพื่อเปิดรางวัล 🎁',
+        prize_title_win: '🎊 ยินดีด้วย!',
+        prize_title_lose: '😅 ขอบคุณที่ร่วมกิจกรรม',
+        redeem_title: 'วิธีการแลกรางวัล',
+        redeem_1: 'แสดงหน้าจอนี้ที่ร้านค้าที่กำหนดเพื่อแลกรางวัล',
+        redeem_2: 'บาร์โค้ดแต่ละชุดใช้แลกได้เพียงครั้งเดียว',
+        redeem_3: 'รางวัลไม่สามารถโอนสิทธิ์หรือแลกเป็นเงินสดได้',
+        redeem_4: 'ใช้ได้ตั้งแต่วันนี้ถึง 2026/12/31',
+        screenshot_hint: '📸 แนะนำให้บันทึกภาพหน้าจอไว้',
+        used_title: 'เคยร่วมกิจกรรมแล้ว',
+        used_desc: 'ฝาขวดแต่ละใบใช้ได้เพียงครั้งเดียว<br>ขอบคุณที่ร่วมกิจกรรม!',
+        used_participant: 'ผู้เข้าร่วม: ',
+        used_prize: 'รางวัลที่ได้: ',
+        used_barcode: 'บาร์โค้ด: ',
+        error_title: 'ลิงก์ไม่ถูกต้อง',
+        error_desc: 'กรุณาตรวจสอบว่าคุณสแกน QR Code บนฝาขวดถูกต้อง',
+        alert_phone: 'กรุณากรอกเบอร์โทรศัพท์ที่ถูกต้อง (10 หลัก ขึ้นต้นด้วย 09)',
+    },
+};
+
+let currentLang = localStorage.getItem('scratch_lang') || 'zh';
+
+/** 取得翻譯文字 */
+function t(key) {
+    return LANG[currentLang][key] || LANG['zh'][key] || key;
+}
+
+/** 取得獎品名稱（依語言） */
+function getPrizeName(prize) {
+    if (typeof prize.name === 'object') {
+        return prize.name[currentLang] || prize.name.zh;
+    }
+    return prize.name;
+}
+
+/** 切換語言 */
+function setLang(lang) {
+    currentLang = lang;
+    localStorage.setItem('scratch_lang', lang);
+
+    // 更新 html lang 屬性
+    document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
+
+    // 更新頁面 title
+    document.title = t('page_title');
+
+    // 更新按鈕 active 狀態
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+
+    // 遍歷所有 data-i18n 元素
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const text = t(key);
+        // 保留含 <br> 的 HTML
+        if (text.includes('<br>')) {
+            el.innerHTML = text;
+        } else {
+            el.textContent = text;
+        }
+    });
+
+    // 遍歷所有 data-i18n-placeholder 元素
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        el.placeholder = t(key);
+    });
+}
 
 // ==================== DOM 元素 ====================
 
@@ -91,6 +250,16 @@ function vibrate(pattern) {
 let currentCode = null;
 
 function init() {
+    // 初始化語言
+    setLang(currentLang);
+
+    // 綁定語言切換按鈕
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            setLang(btn.dataset.lang);
+        });
+    });
+
     currentCode = getCodeFromURL();
 
     // 無 code → 顯示錯誤頁
@@ -138,7 +307,7 @@ document.getElementById('register-form').addEventListener('submit', function (e)
 
     // 驗證手機格式
     if (!/^09\d{8}$/.test(phone)) {
-        alert('請輸入正確的手機號碼格式（09 開頭共 10 碼）');
+        alert(t('alert_phone'));
         return;
     }
 
@@ -183,18 +352,18 @@ function initScratchCard() {
         scratchCtx.fillStyle = '#b0b0b0';
         scratchCtx.fillRect(0, 0, rect.width, rect.height);
 
-        // 遮罩上的提示文字
+        // 遮罩上的提示文字（多國語言）
         scratchCtx.fillStyle = '#888';
         scratchCtx.font = 'bold 20px sans-serif';
         scratchCtx.textAlign = 'center';
         scratchCtx.textBaseline = 'middle';
-        scratchCtx.fillText('用手指刮開此區域', rect.width / 2, rect.height / 2);
+        scratchCtx.fillText(t('scratch_canvas_text'), rect.width / 2, rect.height / 2);
 
         // 設定刮除混合模式
         scratchCtx.globalCompositeOperation = 'destination-out';
 
-        // 設定底層文字
-        document.getElementById('scratch-prize-text').textContent = '🎁 刮開揭曉獎品 🎁';
+        // 設定底層文字（多國語言）
+        document.getElementById('scratch-prize-text').textContent = t('scratch_hidden_text');
 
         // 綁定事件
         scratchCanvas.addEventListener('mousedown', onScratchStart);
@@ -270,7 +439,7 @@ function onScratchComplete() {
     const prize = drawPrize();
     const barcodeNum = generateBarcodeNumber();
 
-    // 更新 localStorage
+    // 更新 localStorage（儲存獎品名稱用中文，顯示時依語言切換）
     const data = getData(currentCode);
     data.scratched = true;
     data.prize = {
@@ -292,14 +461,14 @@ function onScratchComplete() {
 function showPrizePage(prize) {
     const isNoPrize = prize.id === 'prize_06';
 
-    // 標題
+    // 標題（多國語言）
     const titleEl = document.getElementById('prize-title');
-    titleEl.textContent = isNoPrize ? '😅 銘謝惠顧' : '🎊 恭喜中獎！';
+    titleEl.textContent = isNoPrize ? t('prize_title_lose') : t('prize_title_win');
 
     // 圖片
     const imgEl = document.getElementById('prize-image');
     imgEl.src = prize.image;
-    imgEl.alt = prize.name;
+    imgEl.alt = getStoredPrizeName(prize);
     // placeholder fallback
     imgEl.onerror = function () {
         this.style.display = 'none';
@@ -307,8 +476,8 @@ function showPrizePage(prize) {
             (isNoPrize ? '🙏' : '🎁') + '</div>';
     };
 
-    // 獎品名稱
-    document.getElementById('prize-name').textContent = prize.name;
+    // 獎品名稱（多國語言）
+    document.getElementById('prize-name').textContent = getStoredPrizeName(prize);
 
     // 條碼
     try {
@@ -340,15 +509,28 @@ function showPrizePage(prize) {
     }
 }
 
+/** 從儲存的獎品資料取得當前語言的名稱 */
+function getStoredPrizeName(prize) {
+    if (typeof prize.name === 'object') {
+        return prize.name[currentLang] || prize.name.zh;
+    }
+    // 舊資料相容：從 PRIZES 找對應翻譯
+    const match = PRIZES.find(p => p.id === prize.id);
+    if (match) {
+        return match.name[currentLang] || match.name.zh;
+    }
+    return prize.name;
+}
+
 // ==================== 已參加過頁 ====================
 
 function showUsedPage(data) {
     const infoEl = document.getElementById('used-info');
     let html = '';
     if (data.prize) {
-        html += '<p><strong>參加者：</strong>' + escapeHTML(data.name) + '</p>';
-        html += '<p><strong>中獎獎品：</strong>' + escapeHTML(data.prize.name) + '</p>';
-        html += '<p><strong>條碼號碼：</strong>' + escapeHTML(data.prize.barcodeNumber) + '</p>';
+        html += '<p><strong>' + t('used_participant') + '</strong>' + escapeHTML(data.name) + '</p>';
+        html += '<p><strong>' + t('used_prize') + '</strong>' + escapeHTML(getStoredPrizeName(data.prize)) + '</p>';
+        html += '<p><strong>' + t('used_barcode') + '</strong>' + escapeHTML(data.prize.barcodeNumber) + '</p>';
     }
     infoEl.innerHTML = html;
     showPage('used');
