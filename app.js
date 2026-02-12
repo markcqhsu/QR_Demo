@@ -60,6 +60,9 @@ const LANG = {
         // 錯誤頁
         error_title: '無效的活動連結',
         error_desc: '請確認您掃描的是正確的瓶蓋 QR Code。',
+        // 重置按鈕
+        btn_reset: '🗑 清除此瓶蓋紀錄',
+        confirm_reset: '確定要清除此瓶蓋紀錄嗎？清除後可重新參加活動。',
         // 表單驗證
         alert_phone: '請輸入正確的手機號碼格式（09 開頭共 10 碼）',
     },
@@ -93,6 +96,8 @@ const LANG = {
         used_barcode: 'Barcode: ',
         error_title: 'Invalid Link',
         error_desc: 'Please make sure you scanned the correct bottle cap QR Code.',
+        btn_reset: '🗑 Clear Record',
+        confirm_reset: 'Are you sure you want to clear this record? You can participate again after clearing.',
         alert_phone: 'Please enter a valid phone number (10 digits starting with 09)',
     },
     th: {
@@ -125,6 +130,8 @@ const LANG = {
         used_barcode: 'บาร์โค้ด: ',
         error_title: 'ลิงก์ไม่ถูกต้อง',
         error_desc: 'กรุณาตรวจสอบว่าคุณสแกน QR Code บนฝาขวดถูกต้อง',
+        btn_reset: '🗑 ล้างข้อมูล',
+        confirm_reset: 'คุณแน่ใจหรือไม่ว่าต้องการล้างข้อมูลนี้? คุณสามารถเข้าร่วมกิจกรรมได้อีกครั้ง',
         alert_phone: 'กรุณากรอกเบอร์โทรศัพท์ที่ถูกต้อง (10 หลัก ขึ้นต้นด้วย 09)',
     },
 };
@@ -260,6 +267,11 @@ function init() {
         });
     });
 
+    // 綁定清除紀錄按鈕
+    document.querySelectorAll('#btn-reset, #btn-reset-used').forEach(btn => {
+        btn.addEventListener('click', resetCurrentCode);
+    });
+
     currentCode = getCodeFromURL();
 
     // 無 code → 顯示錯誤頁
@@ -293,6 +305,17 @@ function handleLocalFlow(code) {
         // 狀態三：已刮過 → 已參加頁
         showUsedPage(data);
     }
+}
+
+// ==================== 清除紀錄 ====================
+
+function resetCurrentCode() {
+    if (!currentCode) return;
+    if (!confirm(t('confirm_reset'))) return;
+    localStorage.removeItem(STORAGE_PREFIX + currentCode);
+    showPage('register');
+    // 清空表單
+    document.getElementById('register-form').reset();
 }
 
 // ==================== 填資料頁 ====================
