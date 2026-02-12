@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>瓶蓋刮刮樂活動</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- JsBarcode CDN for Code128 barcode -->
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+</head>
+<body>
+
+    <!-- ==================== 頁面一：Loading 驗證頁 ==================== -->
+    <div id="page-loading" class="page active">
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <p class="loading-text">驗證活動資格中...</p>
+        </div>
+    </div>
+
+    <!-- ==================== 頁面二：填資料頁 ==================== -->
+    <div id="page-register" class="page">
+        <div class="page-inner">
+            <div class="logo-area">
+                <div class="logo-icon">🎉</div>
+                <h1>瓶蓋刮刮樂</h1>
+                <p class="subtitle">填寫資料即可參加抽獎！</p>
+            </div>
+            <form id="register-form" class="form-card">
+                <div class="form-group">
+                    <label for="input-name">姓名</label>
+                    <input type="text" id="input-name" placeholder="請輸入您的姓名" required>
+                </div>
+                <div class="form-group">
+                    <label for="input-phone">手機號碼</label>
+                    <input type="tel" id="input-phone" placeholder="例：0912345678" required pattern="09\d{8}">
+                </div>
+                <button type="submit" class="btn-primary">開始刮獎！</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== 頁面三：刮刮樂頁 ==================== -->
+    <div id="page-scratch" class="page">
+        <div class="page-inner">
+            <h1>刮刮樂</h1>
+            <p class="subtitle">用手指刮開灰色區域</p>
+            <div class="scratch-container">
+                <div id="scratch-prize-text" class="scratch-hidden-text">獎品載入中...</div>
+                <canvas id="scratch-canvas"></canvas>
+            </div>
+            <p class="scratch-hint">刮開超過 50% 即可揭曉獎品</p>
+        </div>
+    </div>
+
+    <!-- ==================== 頁面四：中獎頁 ==================== -->
+    <div id="page-prize" class="page">
+        <div class="page-inner">
+            <div class="confetti-container" id="confetti-container"></div>
+            <h1 class="prize-title" id="prize-title">🎊 恭喜中獎！</h1>
+            <div class="prize-image-container">
+                <img id="prize-image" src="" alt="獎品圖片">
+            </div>
+            <h2 class="prize-name" id="prize-name"></h2>
+            <div class="barcode-container">
+                <svg id="prize-barcode"></svg>
+                <p class="barcode-number" id="barcode-number"></p>
+            </div>
+            <div class="redeem-info">
+                <h3>兌換說明</h3>
+                <ul>
+                    <li>請於活動期間內至指定門市出示此畫面兌換</li>
+                    <li>每組條碼僅限兌換一次</li>
+                    <li>獎品不得轉讓或折換現金</li>
+                    <li>活動期限：即日起至 2026/12/31</li>
+                </ul>
+            </div>
+            <p class="screenshot-hint">📸 建議截圖保存此畫面</p>
+        </div>
+    </div>
+
+    <!-- ==================== 頁面五：已參加過頁 ==================== -->
+    <div id="page-used" class="page">
+        <div class="page-inner center-content">
+            <div class="used-icon">🚫</div>
+            <h1>此瓶蓋已參加過活動</h1>
+            <p class="used-desc">每個瓶蓋僅能參加一次抽獎活動，<br>感謝您的參與！</p>
+            <div class="used-info" id="used-info"></div>
+        </div>
+    </div>
+
+    <!-- ==================== 頁面：無效代碼 ==================== -->
+    <div id="page-error" class="page">
+        <div class="page-inner center-content">
+            <div class="used-icon">⚠️</div>
+            <h1>無效的活動連結</h1>
+            <p class="used-desc">請確認您掃描的是正確的瓶蓋 QR Code。</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
