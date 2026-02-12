@@ -268,9 +268,7 @@ function init() {
     });
 
     // 綁定清除紀錄按鈕
-    document.querySelectorAll('#btn-reset, #btn-reset-used').forEach(btn => {
-        btn.addEventListener('click', resetCurrentCode);
-    });
+    document.getElementById('btn-reset').addEventListener('click', resetCurrentCode);
 
     currentCode = getCodeFromURL();
 
