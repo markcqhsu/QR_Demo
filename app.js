@@ -157,7 +157,8 @@ function setLang(lang) {
     localStorage.setItem('scratch_lang', lang);
 
     // 更新 html lang 屬性
-    document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
+    const langMap = { zh: 'zh-TW', en: 'en', th: 'th' };
+    document.documentElement.lang = langMap[lang] || lang;
 
     // 更新頁面 title
     document.title = t('page_title');
@@ -184,6 +185,33 @@ function setLang(lang) {
         const key = el.getAttribute('data-i18n-placeholder');
         el.placeholder = t(key);
     });
+
+    // 重新渲染動態產生的頁面內容
+    refreshDynamicPages();
+}
+
+/** 重新渲染動態頁面（已參加頁、中獎頁、刮刮樂 Canvas） */
+function refreshDynamicPages() {
+    if (!currentCode) return;
+    const data = getData(currentCode);
+    if (!data) return;
+
+    // 已參加過頁：重新產生 info 卡片
+    if (pages.used.classList.contains('active') && data.prize) {
+        showUsedPage(data);
+    }
+
+    // 中獎頁：重新設定標題與獎品名稱
+    if (pages.prize.classList.contains('active') && data.prize) {
+        const isNoPrize = data.prize.id === 'prize_06';
+        document.getElementById('prize-title').textContent = isNoPrize ? t('prize_title_lose') : t('prize_title_win');
+        document.getElementById('prize-name').textContent = getStoredPrizeName(data.prize);
+    }
+
+    // 刮刮樂頁：重新繪製 Canvas 遮罩（僅在尚未刮開時）
+    if (pages.scratch.classList.contains('active') && !scratchRevealed) {
+        initScratchCard();
+    }
 }
 
 // ==================== DOM 元素 ====================
