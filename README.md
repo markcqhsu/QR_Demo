@@ -9,7 +9,7 @@ QR_Demo/
 ├── index.html      ← 主頁面（SPA，5 個頁面狀態）
 ├── style.css       ← 手機版優先樣式
 ├── app.js          ← 所有邏輯（抽獎、刮刮樂、localStorage）
-├── images/         ← 獎品圖片目錄（放入 prize_01~06.png）
+├── images/         ← 獎品圖片目錄（放入 prize_01~07.png/jpg）
 └── README.md
 ```
 
@@ -38,11 +38,12 @@ QR_Demo/
 
 | 獎項 | 獎品 | 機率 |
 |------|------|------|
-| 頭獎 | iPhone 17 | 34% |
-| 二獎 | AirPods | 30% |
+| 頭獎 | iPhone 17 | 30% |
+| 二獎 | AirPods | 24% |
 | 三獎 | 超商禮券 100 元 | 20% |
 | 四獎 | 買一送一券 | 10% |
-| 五獎 | 折價 50 元 | 5% |
+| 五獎 | Ferrari 模型車 | 10% |
+| 六獎 | 折價 50 元 | 5% |
 | — | 銘謝惠顧 | 1% |
 
 ## 活動流程
@@ -73,6 +74,7 @@ index.html?code=TEST001
 - `prize_04.png` — 買一送一券
 - `prize_05.png` — 折價 50 元
 - `prize_06.png` — 銘謝惠顧
+- `prize_07.jpg` — Ferrari 模型車
 
 建議使用 1:1 比例圖片。未放置圖片時會自動顯示 emoji 作為 placeholder。
 

@@ -9,12 +9,13 @@ const DEMO_MODE = true;  // true = 純前端 localStorage；false = 預留未來
 
 // 獎項設定：機率總和必須為 100
 const PRIZES = [
-    { id: 'prize_01', name: { zh: 'iPhone 17',        en: 'iPhone 17',        th: 'iPhone 17' },        chance: 34, image: 'images/prize_01.png' },
-    { id: 'prize_02', name: { zh: 'AirPods',          en: 'AirPods',          th: 'AirPods' },          chance: 30, image: 'images/prize_02.png' },
+    { id: 'prize_01', name: { zh: 'iPhone 17',        en: 'iPhone 17',        th: 'iPhone 17' },        chance: 30, image: 'images/prize_01.png' },
+    { id: 'prize_02', name: { zh: 'AirPods',          en: 'AirPods',          th: 'AirPods' },          chance: 24, image: 'images/prize_02.png' },
     { id: 'prize_03', name: { zh: '超商禮券 100 元',   en: '$100 Gift Card',   th: 'บัตรของขวัญ 100 บาท' },   chance: 20, image: 'images/prize_03.png' },
     { id: 'prize_04', name: { zh: '買一送一券',        en: 'Buy 1 Get 1 Free', th: 'ซื้อ 1 แถม 1' }, chance: 10, image: 'images/prize_04.png' },
     { id: 'prize_05', name: { zh: '折價 50 元',        en: '$50 Discount',     th: 'ส่วนลด 50 บาท' },     chance: 5,  image: 'images/prize_05.png' },
     { id: 'prize_06', name: { zh: '銘謝惠顧',          en: 'Better Luck Next Time', th: 'ขอบคุณที่ร่วมกิจกรรม' }, chance: 1, image: 'images/prize_06.png' },
+    { id: 'prize_07', name: { zh: 'Ferrari 模型車',    en: 'Ferrari Model Car', th: 'รถโมเดล Ferrari' },    chance: 10, image: 'images/prize_07.jpg' },
 ];
 
 // localStorage key prefix
