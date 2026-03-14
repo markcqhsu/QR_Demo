@@ -9,13 +9,13 @@ const DEMO_MODE = true;  // true = 純前端 localStorage；false = 預留未來
 
 // 獎項設定：機率總和必須為 100
 const PRIZES = [
-    { id: 'prize_01', name: { zh: 'iPhone 17',        en: 'iPhone 17',        th: 'iPhone 17' },        chance: 30, image: 'images/prize_01.png' },
-    { id: 'prize_02', name: { zh: 'AirPods',          en: 'AirPods',          th: 'AirPods' },          chance: 24, image: 'images/prize_02.png' },
-    { id: 'prize_03', name: { zh: '超商禮券 100 元',   en: '$100 Gift Card',   th: 'บัตรของขวัญ 100 บาท' },   chance: 20, image: 'images/prize_03.png' },
-    { id: 'prize_04', name: { zh: '買一送一券',        en: 'Buy 1 Get 1 Free', th: 'ซื้อ 1 แถม 1' }, chance: 10, image: 'images/prize_04.png' },
-    { id: 'prize_05', name: { zh: '折價 50 元',        en: '$50 Discount',     th: 'ส่วนลด 50 บาท' },     chance: 5,  image: 'images/prize_05.png' },
-    { id: 'prize_06', name: { zh: '銘謝惠顧',          en: 'Better Luck Next Time', th: 'ขอบคุณที่ร่วมกิจกรรม' }, chance: 1, image: 'images/prize_06.png' },
-    { id: 'prize_07', name: { zh: 'Ferrari 模型車',    en: 'Ferrari Model Car', th: 'รถโมเดล Ferrari' },    chance: 10, image: 'images/prize_07.jpg' },
+    { id: 'prize_01', name: { zh: 'iPhone 17',        en: 'iPhone 17',        th: 'iPhone 17',        es: 'iPhone 17' },               chance: 30, image: 'images/prize_01.png' },
+    { id: 'prize_02', name: { zh: 'AirPods',          en: 'AirPods',          th: 'AirPods',          es: 'AirPods' },                 chance: 24, image: 'images/prize_02.png' },
+    { id: 'prize_03', name: { zh: '超商禮券 100 元',   en: '$100 Gift Card',   th: 'บัตรของขวัญ 100 บาท', es: 'Vale de Regalo $100' },   chance: 20, image: 'images/prize_03.png' },
+    { id: 'prize_04', name: { zh: '買一送一券',        en: 'Buy 1 Get 1 Free', th: 'ซื้อ 1 แถม 1',     es: '2 por 1' },                 chance: 10, image: 'images/prize_04.png' },
+    { id: 'prize_05', name: { zh: '折價 50 元',        en: '$50 Discount',     th: 'ส่วนลด 50 บาท',    es: 'Descuento $50' },           chance: 5,  image: 'images/prize_05.png' },
+    { id: 'prize_06', name: { zh: '銘謝惠顧',          en: 'Better Luck Next Time', th: 'ขอบคุณที่ร่วมกิจกรรม', es: 'Mejor Suerte la Próxima' }, chance: 1, image: 'images/prize_06.png' },
+    { id: 'prize_07', name: { zh: 'Ferrari 模型車',    en: 'Ferrari Model Car', th: 'รถโมเดล Ferrari',  es: 'Auto Modelo Ferrari' },     chance: 10, image: 'images/prize_07.jpg' },
 ];
 
 // localStorage key prefix
@@ -135,6 +135,40 @@ const LANG = {
         confirm_reset: 'คุณแน่ใจหรือไม่ว่าต้องการล้างข้อมูลนี้? คุณสามารถเข้าร่วมกิจกรรมได้อีกครั้ง',
         alert_phone: 'กรุณากรอกเบอร์โทรศัพท์ที่ถูกต้อง (10 หลัก ขึ้นต้นด้วย 09)',
     },
+    es: {
+        page_title: 'Actividad de Rasca Tapas',
+        loading_text: 'Verificando elegibilidad...',
+        register_title: 'Rasca y Gana',
+        register_subtitle: '¡Ingresa tus datos para participar en el sorteo!',
+        label_name: 'Nombre',
+        label_phone: 'Número de teléfono',
+        placeholder_name: 'Ingresa tu nombre',
+        placeholder_phone: 'ej. 0912345678',
+        btn_start: '¡Empezar a rascar!',
+        scratch_title: 'Tarjeta Rasca',
+        scratch_subtitle: 'Usa tu dedo para rascar el área gris',
+        scratch_hint: 'Rasca más del 50% para revelar tu premio',
+        scratch_canvas_text: 'Rasca aquí',
+        scratch_hidden_text: '🎁 Rasca para Revelar 🎁',
+        prize_title_win: '🎊 ¡Felicitaciones!',
+        prize_title_lose: '😅 Mejor Suerte la Próxima',
+        redeem_title: 'Información de Canje',
+        redeem_1: 'Presenta esta pantalla en una tienda designada para canjear',
+        redeem_2: 'Cada código de barras solo puede canjearse una vez',
+        redeem_3: 'Los premios no son transferibles ni canjeables por efectivo',
+        redeem_4: 'Válido desde hoy hasta el 2026/12/31',
+        screenshot_hint: '📸 Te recomendamos tomar una captura de pantalla',
+        used_title: 'Ya Participaste',
+        used_desc: 'Cada tapa solo puede usarse una vez.<br>¡Gracias por participar!',
+        used_participant: 'Participante: ',
+        used_prize: 'Premio Ganado: ',
+        used_barcode: 'Código de barras: ',
+        error_title: 'Enlace Inválido',
+        error_desc: 'Por favor asegúrate de haber escaneado el QR Code correcto de la tapa.',
+        btn_reset: '🗑 Borrar Registro',
+        confirm_reset: '¿Estás seguro de que deseas borrar este registro? Podrás participar nuevamente después de borrarlo.',
+        alert_phone: 'Por favor ingresa un número de teléfono válido (10 dígitos comenzando con 09)',
+    },
 };
 
 let currentLang = localStorage.getItem('scratch_lang') || 'zh';
@@ -158,7 +192,7 @@ function setLang(lang) {
     localStorage.setItem('scratch_lang', lang);
 
     // 更新 html lang 屬性
-    const langMap = { zh: 'zh-TW', en: 'en', th: 'th' };
+    const langMap = { zh: 'zh-TW', en: 'en', th: 'th', es: 'es' };
     document.documentElement.lang = langMap[lang] || lang;
 
     // 更新頁面 title
